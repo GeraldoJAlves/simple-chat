@@ -1,28 +1,24 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Text} from 'react-native';
 
 import {Container, ButtonLogout} from './styles';
 
-import {
-  getCurrentUserInfo,
-  isSignedIn,
-  signOut,
-} from '../../services/authGoogle';
+import {logout} from '../../store/actions/user';
 
 const Profile = () => {
   //const [user, setUser] = useState({});
 
   const user = useSelector((state) => state.user);
 
-  console.log(user);
+  const dispatch = useDispatch();
 
   return (
     <Container>
       <Text>{user.email}</Text>
       <ButtonLogout
-        onPress={async () => {
-          await signOut();
+        onPress={() => {
+          dispatch(logout());
         }}>
         <Text>Sair</Text>
       </ButtonLogout>

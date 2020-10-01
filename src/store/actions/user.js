@@ -10,9 +10,26 @@ import {
 
 import {setMessage} from './message';
 
-import {signIn} from '../../services/authGoogle';
+import {signIn, signOut} from '../../services/authGoogle';
 
-export const login = () => {
+export const logoutGoogle = () => {
+  return async (dispatch) => {
+    try {
+      await signOut();
+      dispatch(logout());
+    } catch (e) {
+      dispatch(
+        setMessage({
+          title: 'Atenção',
+          text: 'Erro ao fazer logout!',
+        }),
+      );
+      console.log('erro login', e);
+    }
+  };
+};
+
+export const loginGoogle = () => {
   return async (dispatch) => {
     try {
       dispatch(loadingUser());
@@ -36,7 +53,7 @@ export const login = () => {
       dispatch(
         setMessage({
           title: 'Atenção',
-          text: 'Usuario não econtrado!',
+          text: 'Erro ao fazer login!',
         }),
       );
       console.log('erro login', err);

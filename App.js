@@ -1,28 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {View, StatusBar, Platform, Alert} from 'react-native';
 
-import {View, Text, StatusBar, Platform} from 'react-native';
-import Auth from './src/screens/Auth';
-import Profile from './src/screens/Profile';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {isSignedIn} from './src/services/authGoogle';
+import Navigator from './src/navigator';
+import {setMessage} from './src/store/actions/message';
 
 const App = () => {
+  const message = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+
+  if (message.title && message.text) {
+    Alert.alert(message.title, message.text);
+    dispatch(setMessage({title: '', text: ''}));
+  }
+
   const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 40 : 0;
   const STATUSBAR_COLOR = '#000';
-
-  const [isLogged, setIsLogged] = useState(false);
-
-  // if (isSignedIn()) {
-  //   getCurrentUserInfo().then((userInfo) => {
-  //     console.log(userInfo.user);
-  //   });
-  // }
-
-  // isSignedIn()
-  //   .then((result) => {
-  //     setIsLogged(result);
-  //   })
-  //   .catch((e) => console.log(e));
 
   return (
     <>
@@ -30,7 +24,7 @@ const App = () => {
         style={{height: STATUSBAR_HEIGHT, backgroundColor: STATUSBAR_COLOR}}>
         <StatusBar barStyle="light-content" backgroundColor={STATUSBAR_COLOR} />
       </View>
-      {isLogged ? <Profile /> : <Auth />}
+      <Navigator />
     </>
   );
 };
