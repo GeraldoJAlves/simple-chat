@@ -18,11 +18,11 @@ const App = () => {
   //   });
   // }
 
-  isSignedIn()
-    .then((result) => {
-      setIsLogged(result);
-    })
-    .catch((e) => console.log(e));
+  // isSignedIn()
+  //   .then((result) => {
+  //     setIsLogged(result);
+  //   })
+  //   .catch((e) => console.log(e));
 
   return (
     <>

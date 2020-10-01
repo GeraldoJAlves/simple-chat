@@ -65,7 +65,7 @@ export const getCurrentUserInfo = async () => {
 export const signOut = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      await GoogleSignin.revokeAccess();
+      console.log('sign out');
       await GoogleSignin.signOut();
       resolve();
     } catch (error) {
