@@ -4,7 +4,7 @@ import {Text} from 'react-native';
 
 import {Container, ButtonLogout} from './styles';
 
-import {logout} from '../../store/actions/user';
+import {logoutGoogle} from '../../store/actions/user';
 
 const Profile = () => {
   //const [user, setUser] = useState({});
@@ -18,7 +18,7 @@ const Profile = () => {
       <Text>{user.email}</Text>
       <ButtonLogout
         onPress={() => {
-          dispatch(logout());
+          dispatch(logoutGoogle());
         }}>
         <Text>Sair</Text>
       </ButtonLogout>

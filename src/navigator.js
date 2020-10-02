@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+
+import {useDispatch, useSelector} from 'react-redux';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -8,15 +10,27 @@ import Auth from './screens/Auth';
 import Profile from './screens/Profile';
 import ChatList from './screens/ChatList';
 import Register from './screens/Register';
-import {useSelector} from 'react-redux';
+import SplashScreen from './screens/SplashScreen';
+
+import {restoreToken} from './store/actions/user';
 
 const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
 
 const Navigator = () => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  console.log(user);
+  useEffect(() => {
+    console.log('effect');
+    if (user.isLoading) {
+      dispatch(restoreToken());
+    }
+  }, [user, dispatch]);
+
+  if (user.isLoading) {
+    return <SplashScreen />;
+  }
 
   return (
     <NavigationContainer>
