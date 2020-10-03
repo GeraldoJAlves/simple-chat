@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import firestore from '@react-native-firebase/firestore';
 
 import {USER_LOGGED_IN, USER_LOGGED_OUT, RESTORE_TOKEN} from './action.types';
 
@@ -29,7 +30,13 @@ export const loginGoogle = () => {
     try {
       const result = await signIn();
       if (result.user) {
+        console.log(result.user);
         await AsyncStorage.setItem('userToken', result.idToken);
+        await firestore().collection('users').doc(result.user.id).set({
+          email: result.user.email,
+          name: result.user.name,
+          photo: result.user.photo,
+        });
         dispatch(
           userLogged({
             token: result.idToken,

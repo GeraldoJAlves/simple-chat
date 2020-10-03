@@ -3,6 +3,8 @@ import {View, StatusBar, Platform, Alert} from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
 
+import './src/infra/initFirestore';
+
 import Navigator from './src/navigator';
 import {setMessage} from './src/store/actions/message';
 
