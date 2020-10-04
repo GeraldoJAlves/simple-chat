@@ -18,7 +18,7 @@ const ChatList = () => {
         if (documentSnapshot.docs.length) {
           const {message} = documentSnapshot.docs[0].data();
           console.log('User data: ', message);
-          dispatch(setMessage(message));
+          //dispatch(setMessage(message));
         }
       });
 

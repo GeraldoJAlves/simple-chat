@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -8,9 +8,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Auth from './screens/Auth';
 import Profile from './screens/Profile';
+import Users from './screens/Users';
 import ChatList from './screens/ChatList';
 import Register from './screens/Register';
 import SplashScreen from './screens/SplashScreen';
+import SearchBar from './components/searchBar';
+
+import colors from './styles/colors';
 
 import {restoreToken} from './store/actions/user';
 
@@ -37,10 +41,38 @@ const Navigator = () => {
       {!user.token ? (
         <AuthStack />
       ) : (
-        <Tab.Navigator>
-          <Tab.Screen name="Profile" component={Profile} />
-          <Tab.Screen name="Chats" component={ChatList} />
-        </Tab.Navigator>
+        <>
+          <SearchBar />
+          <Tab.Navigator
+            tabBarOptions={{
+              activeTintColor: 'white',
+              pressOpacity: 1,
+              labelStyle:{
+                fontWeight: 'bold'
+              },
+              indicatorStyle: {
+                borderBottomColor: colors.white,
+                borderBottomWidth: 3,
+              },
+              inactiveTintColor: '#CCC',
+              style: {
+                backgroundColor: colors.primary,
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+
+                elevation: 5,
+              },
+            }}>
+            <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen name="Chats" component={ChatList} />
+            <Stack.Screen name="Users" component={Users} />
+          </Tab.Navigator>
+        </>
       )}
     </NavigationContainer>
   );
