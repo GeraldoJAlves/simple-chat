@@ -13,12 +13,29 @@ export const Container = styled.View`
   padding: 10px;
 `;
 
+export const ContainerSearch = styled.View`
+  background-color: ${colors.white};
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  box-shadow: 2px 2px 10px black;
+  elevation: 5;
+`;
+
 export const TextTitleApp = styled.Text`
   flex: 1;
   color: ${colors.font};
   font-size: 20px;
   font-weight: bold;
 `;
+
+export const InputSearch = styled.TextInput`
+  flex: 1;
+  font-size: 20px;
+  margin-left: 15px;
+`;
+
 export const Button = styled.TouchableOpacity`
   margin-left: 15px;
 `;
@@ -29,4 +46,8 @@ export const SearchIcon = styled(Icon)`
 
 export const OptionsIcon = styled(MaterialCommunityIcons)`
   color: ${colors.font};
+`;
+
+export const BackIcon = styled(MaterialCommunityIcons)`
+  color: ${colors.primary};
 `;

@@ -4,6 +4,7 @@ export const Container = styled.View`
   height: 100%;
   align-items: center;
   justify-content: center;
+  background: #ddd;
 `;
 
 export const ButtonLogout = styled.TouchableOpacity`

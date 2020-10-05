@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -23,6 +23,7 @@ const Stack = createStackNavigator();
 
 const Navigator = () => {
   const user = useSelector((state) => state.user);
+  const [hideTabBar, setHideTabBar] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,37 +37,49 @@ const Navigator = () => {
     return <SplashScreen />;
   }
 
+  const styleTabBar = {
+    backgroundColor: colors.primary,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  };
+
+  if (hideTabBar) {
+    styleTabBar.height = 0;
+  }
+
   return (
     <NavigationContainer>
       {!user.token ? (
         <AuthStack />
       ) : (
         <>
-          <SearchBar />
+          <SearchBar
+            hideTabBar={() => {
+              setHideTabBar(true);
+            }}
+            showTabBar={() => {
+              setHideTabBar(false);
+            }}
+          />
           <Tab.Navigator
             tabBarOptions={{
               activeTintColor: 'white',
               pressOpacity: 1,
-              labelStyle:{
-                fontWeight: 'bold'
+              labelStyle: {
+                fontWeight: 'bold',
               },
               indicatorStyle: {
                 borderBottomColor: colors.white,
                 borderBottomWidth: 3,
               },
               inactiveTintColor: '#CCC',
-              style: {
-                backgroundColor: colors.primary,
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 2,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-
-                elevation: 5,
-              },
+              style: styleTabBar,
             }}>
             <Tab.Screen name="Profile" component={Profile} />
             <Tab.Screen name="Chats" component={ChatList} />
