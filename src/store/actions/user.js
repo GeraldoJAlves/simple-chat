@@ -42,6 +42,7 @@ export const loginGoogle = () => {
             token: result.idToken,
             userId: result.user.id,
             email: result.user.email,
+            photo: result.user.photo,
             name: result.user.name,
           }),
         );
@@ -69,6 +70,7 @@ export const restoreToken = () => {
           userLogged({
             token: result.idToken,
             userId: result.user.id,
+            photo: result.user.photo,
             email: result.user.email,
             name: result.user.name,
           }),

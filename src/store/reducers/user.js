@@ -8,6 +8,7 @@ const initialState = {
   name: null,
   email: null,
   token: null,
+  photo: null,
   isLoading: true,
 };
 
@@ -18,6 +19,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         name: action.payload.name,
         email: action.payload.email,
+        photo: action.payload.photo,
         token: action.payload.token,
         isLoading: false,
       };

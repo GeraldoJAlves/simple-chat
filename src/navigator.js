@@ -6,6 +6,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import Auth from './screens/Auth';
 import Profile from './screens/Profile';
 import Users from './screens/Users';
@@ -70,6 +72,7 @@ const Navigator = () => {
           <Tab.Navigator
             tabBarOptions={{
               activeTintColor: 'white',
+              showIcon: true,
               pressOpacity: 1,
               labelStyle: {
                 fontWeight: 'bold',
@@ -81,8 +84,8 @@ const Navigator = () => {
               inactiveTintColor: '#CCC',
               style: styleTabBar,
             }}>
-            <Tab.Screen name="Profile" component={Profile} />
             <Tab.Screen name="Chats" component={ChatList} />
+            <Tab.Screen name="Profile" component={Profile} />
             <Stack.Screen name="Users" component={Users} />
           </Tab.Navigator>
         </>

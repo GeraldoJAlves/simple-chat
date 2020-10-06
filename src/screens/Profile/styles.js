@@ -6,6 +6,9 @@ export const Container = styled.View`
   justify-content: center;
   background: #ddd;
 `;
+export const EmailUser = styled.Text`
+  margin-top: 20px;
+`;
 
 export const ButtonLogout = styled.TouchableOpacity`
   margin-top: 20px;

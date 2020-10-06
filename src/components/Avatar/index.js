@@ -1,12 +1,22 @@
 import React from 'react';
-import {Text} from 'react-native';
 
-import {Container} from './styles';
+import {Container, UserIcon, Image} from './styles';
 
-const Avatar = () => {
+const Avatar = ({uri, size}) => {
+  let defaultSize = 20;
+
+  if (!size) {
+    size = defaultSize;
+  }
+  console.log(uri);
+
   return (
     <Container>
-      <Text>Avatar</Text>
+      {uri ? (
+        <Image source={{uri: uri}} style={{width: size, height: size}} />
+      ) : (
+        <UserIcon name="user-circle" size={size} />
+      )}
     </Container>
   );
 };

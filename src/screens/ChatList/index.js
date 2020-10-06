@@ -1,25 +1,38 @@
-import React, {useEffect} from 'react';
-import {Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {FlatList} from 'react-native';
 import {useDispatch} from 'react-redux';
 
 import firestore from '@react-native-firebase/firestore';
 
-import {Container} from './styles';
+import Avatar from '../../components/Avatar';
 
-import {setMessage} from '../../store/actions/message';
+import {
+  Container,
+  ContainerItem,
+  WrapperInfo,
+  LastMessage,
+  TitleChat,
+  TimeText,
+} from './styles';
 
 const ChatList = () => {
   const dispatch = useDispatch();
 
+  const [chats, setChats] = useState([]);
+
   useEffect(() => {
     const subscriber = firestore()
-      .collection('teste')
+      .collection('rooms')
       .onSnapshot((documentSnapshot) => {
-        if (documentSnapshot.docs.length) {
-          const {message} = documentSnapshot.docs[0].data();
-          console.log('User data: ', message);
-          //dispatch(setMessage(message));
+        const docs = documentSnapshot.docs;
+        const newData = [];
+        console.log(docs[0].data());
+        for (let ind in docs) {
+          newData.push(docs[ind].data());
         }
+        console.log(newData);
+        setChats(newData);
+        //dispatch(setMessage(message));
       });
 
     // Stop listening for updates when no longer required
@@ -28,8 +41,26 @@ const ChatList = () => {
 
   return (
     <Container>
-      <Text>ChatList</Text>
+      <FlatList
+        keyExtractor={(item, index) => '' + index}
+        data={chats}
+        renderItem={({item, index}) => {
+          return <ChatItem name={item.name} />;
+        }}
+      />
     </Container>
+  );
+};
+
+const ChatItem = ({name}) => {
+  return (
+    <ContainerItem>
+      <Avatar size={50} />
+      <WrapperInfo>
+        <TitleChat>{name}</TitleChat>
+        <LastMessage>ola teste</LastMessage>
+      </WrapperInfo>
+    </ContainerItem>
   );
 };
 
