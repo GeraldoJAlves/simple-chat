@@ -8,7 +8,6 @@ const Avatar = ({uri, size}) => {
   if (!size) {
     size = defaultSize;
   }
-  console.log(uri);
 
   return (
     <Container>

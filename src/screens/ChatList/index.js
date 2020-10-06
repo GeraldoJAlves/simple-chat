@@ -15,7 +15,7 @@ import {
   TimeText,
 } from './styles';
 
-const ChatList = () => {
+const ChatList = ({navigation}) => {
   const dispatch = useDispatch();
 
   const [chats, setChats] = useState([]);
@@ -45,16 +45,19 @@ const ChatList = () => {
         keyExtractor={(item, index) => '' + index}
         data={chats}
         renderItem={({item, index}) => {
-          return <ChatItem name={item.name} />;
+          return <ChatItem navigation={navigation} name={item.name} />;
         }}
       />
     </Container>
   );
 };
 
-const ChatItem = ({name}) => {
+const ChatItem = ({name, navigation}) => {
   return (
-    <ContainerItem>
+    <ContainerItem
+      onPress={() => {
+        navigation.navigate('ChatRoom');
+      }}>
       <Avatar size={50} />
       <WrapperInfo>
         <TitleChat>{name}</TitleChat>

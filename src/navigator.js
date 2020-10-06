@@ -6,12 +6,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
 import Auth from './screens/Auth';
 import Profile from './screens/Profile';
 import Users from './screens/Users';
 import ChatList from './screens/ChatList';
+import ChatRoom from './screens/ChatRoom';
 import Register from './screens/Register';
 import SplashScreen from './screens/SplashScreen';
 import SearchBar from './components/searchBar';
@@ -84,7 +83,7 @@ const Navigator = () => {
               inactiveTintColor: '#CCC',
               style: styleTabBar,
             }}>
-            <Tab.Screen name="Chats" component={ChatList} />
+            <Tab.Screen name="Chat" component={ChatStack} />
             <Tab.Screen name="Profile" component={Profile} />
             <Stack.Screen name="Users" component={Users} />
           </Tab.Navigator>
@@ -99,6 +98,15 @@ const AuthStack = () => {
     <Stack.Navigator>
       <Stack.Screen name="Login" component={Auth} />
       <Stack.Screen name="Register" component={Register} />
+    </Stack.Navigator>
+  );
+};
+
+const ChatStack = () => {
+  return (
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="ChatList" component={ChatList} />
+      <Stack.Screen name="ChatRoom" component={ChatRoom} />
     </Stack.Navigator>
   );
 };
