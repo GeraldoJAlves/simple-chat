@@ -17,7 +17,7 @@ const searchBar = ({hideTabBar, showTabBar}) => {
   if (showInputSearch) {
     return (
       <SearchItem
-        setShowInputSearch={setShowInputSearch}
+        hideInputSearch={() => setShowInputSearch(false)}
         showTabBar={showTabBar}
       />
     );
@@ -40,13 +40,13 @@ const searchBar = ({hideTabBar, showTabBar}) => {
   );
 };
 
-const SearchItem = ({showTabBar, setShowInputSearch}) => {
+const SearchItem = ({showTabBar, hideInputSearch}) => {
   return (
     <ContainerSearch>
       <Button
         onPress={() => {
           showTabBar();
-          setShowInputSearch(false);
+          hideInputSearch();
         }}>
         <BackIcon name="arrow-left" size={22} />
       </Button>
