@@ -25,9 +25,10 @@ const ChatRoom = ({navigation}) => {
   return (
     <Container>
       <Header>
-        <ButtonBack onPress={() => {
-          navigation.goBack();
-        }}>
+        <ButtonBack
+          onPress={() => {
+            navigation.goBack();
+          }}>
           <BackIcon name="arrow-left" size={30} />
         </ButtonBack>
         <Avatar size={40} color="light" />
